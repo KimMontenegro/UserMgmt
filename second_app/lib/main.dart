@@ -21,21 +21,24 @@ class MyAppState extends State<MyApp> {
   List data;
   @override
   void initState() {
+    //initial state of the widget
     super.initState();
     this.getData();
   }
 
+  //Future represent a potential value/error that will be available at some time in the future
   Future<String> getData() async {
     //await - wait until we get the data
-    var response = await http
-        .get(Uri.encodeFull("https://localhost:3001/users"), //encode the URL
-            headers: {"Accept": "application/json"});
+    var response = await http.get(
+        Uri.encodeFull("https://localhost:3001/users"), //to encode the URL
+        headers: {"Accept": "application/json"}); //only accept json response
 
-    print(response.body);
+    print(response.body); //will not work unless there's a response.
 
     setState(() {
-      var convert = jsonDecode(response.body);
-      data = convert['results'];
+      //rebuild the widget and modify the app state
+      var convert = jsonDecode(response.body); //convert the data to json
+      data = convert['results']; //to get the converted json data in mockoon
     });
   }
 
@@ -43,24 +46,20 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     //Scaffold provides drawers, snack bars, bottom sheets
     return Scaffold(
-        appBar: AppBar(
-          title: Text('List of Users'),
-        ),
-        body: Center(
-
-            ///appropriate for list views with a large (or infinite)
-            ///number of children because the builder is called only for those
-            ///children that are actually visible.
-            child: ListView.builder(
-          itemCount: data == null ? 0 : data.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-                child: Column(
-              children: <Widget>[
-                Card(child: Container(child: Text("${data[index]["name"]}")))
-              ],
-            ));
-          },
-        )));
+      appBar: AppBar(
+        title: Text('List of Users'),
+      ),
+      body: ListView.builder(
+        //if data is null then 0 otherwise count the length of data
+        itemCount: data == null ? 0 : data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            child: Center(
+              child: Text(data[index]['name']),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
