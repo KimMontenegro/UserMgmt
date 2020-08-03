@@ -18,6 +18,7 @@ class MyApp extends StatefulWidget {
 
 //Pass the state in here
 class MyAppState extends State<MyApp> {
+  final String url = "https://10.0.2.2:3001/users";
   List data;
   @override
   void initState() {
@@ -27,10 +28,10 @@ class MyAppState extends State<MyApp> {
   }
 
   //Future represent a potential value/error that will be available at some time in the future
+  // ignore: missing_return
   Future<String> getData() async {
     //await - wait until we get the data
-    var response = await http.get(
-        Uri.encodeFull("https://localhost:3001/users"), //to encode the URL
+    var response = await http.get(Uri.encodeFull(url), //to encode the url
         headers: {"Accept": "application/json"}); //only accept json response
 
     print(response.body); //will not work unless there's a response.
@@ -50,6 +51,7 @@ class MyAppState extends State<MyApp> {
         title: Text('List of Users'),
       ),
       body: ListView.builder(
+        padding: EdgeInsets.all(20),
         //if data is null then 0 otherwise count the length of data
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
