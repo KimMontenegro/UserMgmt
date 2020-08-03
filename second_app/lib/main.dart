@@ -18,7 +18,6 @@ class MyApp extends StatefulWidget {
 
 //Pass the state in here
 class MyAppState extends State<MyApp> {
-  final String url = "https://10.0.2.2:3001/users";
   List data;
   @override
   void initState() {
@@ -31,7 +30,8 @@ class MyAppState extends State<MyApp> {
   // ignore: missing_return
   Future<String> getData() async {
     //await - wait until we get the data
-    var response = await http.get(Uri.encodeFull(url), //to encode the url
+    var response = await http.get(
+        Uri.encodeFull("192.168.0.18:3001/users"), //to encode the url
         headers: {"Accept": "application/json"}); //only accept json response
 
     print(response.body); //will not work unless there's a response.
