@@ -18,7 +18,31 @@ class MyApp extends StatefulWidget {
 
 //Pass the state in here
 class MyAppState extends State<MyApp> {
+  TextEditingController nameContoller = TextEditingController();
   List data;
+
+  createAlertDialog(BuildContext context){
+    return showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text('done'),
+        content: TextField(
+          controller: nameContoller,
+        ),
+        actions: <Widget>[
+          MaterialButton(
+            elevation: 5.0,
+            child: Text('OK'),
+            onPressed: () {
+
+              Navigator.of(context).pop(nameContoller.text.toString());
+            },
+          )
+        ],
+      );
+    });
+  }
+
+
   @override
   void initState() {
     //initial state of the widget
