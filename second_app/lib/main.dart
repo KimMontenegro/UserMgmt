@@ -38,14 +38,14 @@ class MyAppState extends State<MyApp> {
     // } else {
     //   print('Request failed with status: ${response.statusCode}.');
     // }
+
+    print(response.body); //will not work unless there's a response.
     setState(() {
       //rebuild the widget and modify the app state
       var convert = jsonDecode(response.body); //convert the data to json
       data = convert['results']; //to get the converted json data in mockoon
     });
-
-    return (response.body);
-    //print(response.body); //will not work unless there's a response.
+    return 'Successful!';
   }
 
   @override
