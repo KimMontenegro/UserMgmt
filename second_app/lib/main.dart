@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http; //to handle http request
 import 'dart:convert'; //to convert http response in JSON format
 
 void main() {
-  runApp(new MaterialApp(
-    home: new MyApp(),
+  runApp(MaterialApp(
+    home: MyApp(),
   ));
 }
 
@@ -13,12 +13,11 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   //createState is the method we override
-  MyAppState createState() => new MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
 //Pass the state in here
 class MyAppState extends State<MyApp> {
-  final String url = "http://192.168.0.18:3001/users";
   List data;
 
   @override
@@ -31,8 +30,7 @@ class MyAppState extends State<MyApp> {
   //Future represent a potential value/error that will be available at some time in the future
   Future<String> getJsonData() async {
     //await - wait until we get the data
-    final response = await http.get(Uri.encodeFull(url), //to encode the url
-        headers: {"Accept": "application/json"}); //only accept json response
+    http.Response response = await http.get("https://192.168.0.18:3001/users");
     // if (response.statusCode == 200) {
     //   var jsonResponse = jsonDecode(response.body);
     //   data = jsonResponse['results'];
@@ -53,22 +51,22 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     //Scaffold provides drawers, snack bars, bottom sheets
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('List of Users'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('List of Users'),
       ),
-      body: new ListView.builder(
+      body: ListView.builder(
         //if data is null then 0 otherwise count the length of data
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          return new Container(
-            child: new Center(
-              child: new Column(
+          return Container(
+            child: Center(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  new Card(
-                    child: new Container(
-                      child: new Text(data[index]['name']),
+                  Card(
+                    child: Container(
+                      child: Text(data[index]['name']),
                     ),
                   ),
                 ],
