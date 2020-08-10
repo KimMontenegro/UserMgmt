@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 //Pass the state in here
 class MyAppState extends State<MyApp> {
   List data;
-  static const String HOSTNAME = "10.0.2.2";
+  static const String HOSTNAME = "192.168.0.18";
   static const String PORT = "3001";
   // this is an example of string interpolation
   static const String API_ENDPOINT = "http://$HOSTNAME:$PORT/users";
