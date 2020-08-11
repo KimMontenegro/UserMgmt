@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http; //to handle http request
 import 'dart:convert'; //to convert http response in JSON format
 import 'package:second_app/user.dart';
+import './user.dart';
 
 void main() {
   runApp(MaterialApp(
