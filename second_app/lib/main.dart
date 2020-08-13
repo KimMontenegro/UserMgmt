@@ -94,6 +94,10 @@ class MyAppState extends State<MyApp> {
                 );
               },
             ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Text('Clicked'),
+      ),
     );
   }
 }
